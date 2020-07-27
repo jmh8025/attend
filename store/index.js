@@ -107,41 +107,51 @@ export const state = () => ({
             eval_id : 'ev1',
             eval_nm : '유재석',
             eval_pw : 'mnc@pro1',
-            position: ''
+            position: '',
+            comment : '본 위원'
         },
         //마스터 권한
         {
             eval_id : 'ev2',
             eval_nm : '이효리',
             eval_pw : 'mnc@pro1',
-            position: 'master'
+            position: 'master',
+            comment : '본 위원'
         },
         {
             eval_id : 'ev3',
             eval_nm : '비',
             eval_pw : 'mnc@pro1',
-            position: ''
+            position: '',
+            comment : '본 위원'
+        },
+        {
+            eval_id : 'ev4',
+            eval_nm : '광희',
+            eval_pw : 'mnc@pro1',
+            position: '',
+            comment : '예비 위원'
         }
     ],
     room: [
         {
             room_no : '101',
             room_nm : '101시험장',
-            eval_id : '유재석',
-            attd_cnt: 0,
+            eval_id : ['ev1','ev4'],
+            attd_cnt: 1,
             full_cnt: 3
         },
         {
             room_no : '102',
             room_nm : '102시험장',
-            eval_id : '이효리',
+            eval_id : ['ev2'],
             attd_cnt: 0,
             full_cnt: 3
         },
         {
             room_no : '103',
             room_nm : '103시험장',
-            eval_id : '비',
+            eval_id : ['ev3'],
             attd_cnt: 0,
             full_cnt: 4
         },
