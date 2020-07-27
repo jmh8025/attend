@@ -1,20 +1,6 @@
-# attend
+# 출석 프로젝트
 
-## Build Setup
+## 첫 프로젝트(2020년 7월 23일 ~)
 
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+각자 디렉토리에 같은 state를 정의해둠 
+화이팅 ..! 
