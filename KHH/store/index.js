@@ -156,5 +156,25 @@ export const state = () => ({
             full_cnt: 4
         },
 
+    ],
+    rv: [
+        {
+            chk : ''
+        }
     ]
 })
+
+export const mutations = {
+    login(state, data) {
+        var index = state.eval_member.findIndex(i => i.eval_id == data.login)
+        if(index < 0) {
+            state.rv[0].chk = 'idfail';
+            return;
+        }
+        if(state.eval_member[index].eval_pw == data.password) {
+            state.rv[0].chk = 'success';
+        } else {
+            state.rv[0].chk = 'pwfail';
+        }
+    }
+}
