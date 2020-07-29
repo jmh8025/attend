@@ -155,6 +155,22 @@ export const state = () => ({
             attd_cnt: 0,
             full_cnt: 4
         },
-
-    ]
+    ],
+    authUser : null,
 })
+
+export const mutations = {
+    LOGIN : function(state,user){
+        state.authUser = user
+    }
+}
+
+export const actions = {
+    async login({ state,commit }, { id, pw }) {
+        let  resultUser   = await state.eval_member.filter(function (member) { return member.eval_id == id && member.eval_pw == pw });
+        if (resultUser.length < 1) {
+          throw new Error('로그인에 실패했습니다.')
+        }
+        commit('LOGIN', resultUser[0])
+      },
+}
