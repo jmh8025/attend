@@ -8,7 +8,7 @@
     "start": "nuxt start",
     "export": "nuxt export",
     "serve": "nuxt serve",
-    "generate": "nuxt generate" 
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "nuxt": "^2.13.0"

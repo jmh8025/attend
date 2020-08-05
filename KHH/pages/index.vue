@@ -20,34 +20,40 @@
                 dark
                 flat
               >
-                <v-toolbar-title></v-toolbar-title>
+                <v-toolbar-title>로그인</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Login"
-                    name="login"
+                    label="id"
+                    name="id"
                     prepend-icon="mdi-account"
                     type="text"
-                    v-model="login"
-                    ref="login"
+                    v-model="id"
+                    ref="id"
                   ></v-text-field>
 
                   <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
+                    id="pw"
+                    label="pw"
+                    name="pw"
                     prepend-icon="mdi-lock"
                     type="password"
-                    v-model="password"
-                    ref="password"
+                    v-model="pw"
+                    ref="pw"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
+              <v-snackbar
+                :timeout="timeout"
+                v-model="snackbar"
+              >
+                {{alertMsg }}
+              </v-snackbar>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="LoginClick">Login</v-btn>
+                <v-btn color="primary" @click="login">로그인</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -57,39 +63,35 @@
   </v-app>
 </template>
 
+
 <script>
-import alert from '@/components/alert.vue'
 
   export default {
-    components: {
-      alert
-    },
-    methods: {
-      LoginClick() {
-        let resultObj = {
-            login: this.login,
-            password: this.password
-        }
-        this.$store.commit('login', resultObj);
-        let login_chk = this.$store.state.rv[0].chk;
-        if(login_chk == 'idfail') {
-          console.log('등록하지 않은 아이디입니다.');
-          this.password = "";
-          this.$refs.login.focus();
-        } else if(login_chk == 'pwfail') {
-          console.log('잘못된 비밀번호입니다..');
-          this.password = "";
-          this.$refs.password.focus();
-        } else {
-          console.log('로그인 성공!');
-        }
-      }
-    },
     data() {
       return {
-        login: '',
-        password: ''
+        id: '',
+        pw: '',
+        alertMsg: '',
+        timeout: 2000,
+        snackbar: false
       }
-    }
-  }
+    },
+    methods: {
+     async login () {
+      try {
+        await this.$store.dispatch('login', {
+          id: this.id,
+          pw: this.pw
+        }).then(() => this.redirect())
+      } catch (e) {
+        this.alertMsg = e.message;
+        this.snackbar = 'true';
+        this.timeout = 3000;
+      }
+    },
+    redirect () {
+      this.$router.push('/main')
+    },
+  },
+}
 </script>

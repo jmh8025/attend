@@ -106,7 +106,7 @@ export const state = () => ({
         {
             eval_id : 'ev1',
             eval_nm : '유재석',
-            eval_pw : 'mnc@pro1',
+            eval_pw : '1',
             position: '',
             comment : '본 위원'
         },
@@ -114,21 +114,21 @@ export const state = () => ({
         {
             eval_id : 'ev2',
             eval_nm : '이효리',
-            eval_pw : 'mnc@pro1',
+            eval_pw : '1',
             position: 'master',
             comment : '본 위원'
         },
         {
             eval_id : 'ev3',
             eval_nm : '비',
-            eval_pw : 'mnc@pro1',
+            eval_pw : '1',
             position: '',
             comment : '본 위원'
         },
         {
             eval_id : 'ev4',
             eval_nm : '광희',
-            eval_pw : 'mnc@pro1',
+            eval_pw : '1',
             position: '',
             comment : '예비 위원'
         }
@@ -155,26 +155,53 @@ export const state = () => ({
             attd_cnt: 0,
             full_cnt: 4
         },
-
     ],
-    rv: [
+
+    authUser : null,
+    headers: [
         {
-            chk : ''
-        }
+            text: 'No',
+            value: 'no'
+        },
+        {
+            text: '이름',
+            value: 'student_knm'
+        },
+        {
+            text: '생년월일',
+            value: 'birth_dt'
+        },
+        {
+            text: '수험번호',
+            value: 'exam_no'
+        },
+        {
+            text: '모집단위',
+            value: 'unit_nm'
+        },
+        {
+            text: '출석여부',
+            value: 'room_no'
+        },
+        {
+            text: '신분증미지참',
+            value: 'photo'
+        },
     ]
 })
 
 export const mutations = {
-    login(state, data) {
-        var index = state.eval_member.findIndex(i => i.eval_id == data.login)
-        if(index < 0) {
-            state.rv[0].chk = 'idfail';
-            return;
-        }
-        if(state.eval_member[index].eval_pw == data.password) {
-            state.rv[0].chk = 'success';
-        } else {
-            state.rv[0].chk = 'pwfail';
-        }
+    LOGIN : function(state,user){
+        state.authUser = user
     }
+}
+
+export const actions = {
+    async login({ state,commit }, { id, pw }) {
+        let  resultUser   = await state.eval_member.filter(member => { return member.eval_id == id && member.eval_pw == pw });
+        if (resultUser.length < 1) {
+          throw new Error('로그인에 실패했습니다.')
+        }
+        commit('LOGIN', resultUser[0])
+      },
 }
