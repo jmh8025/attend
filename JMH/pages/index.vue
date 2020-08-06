@@ -91,7 +91,7 @@ export default {
       }
     },
     redirect () {
-      this.$router.push('/inspire')
+      this.$router.push('/Attend')
     },
     snackBar(msg){
       this.returnMsg = msg;

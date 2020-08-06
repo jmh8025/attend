@@ -8,10 +8,11 @@
     "start": "nuxt start",
     "export": "nuxt export",
     "serve": "nuxt serve",
-    "generate": "nuxt generate" 
+    "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "vue-async-computed": "^3.8.2"
   },
   "devDependencies": {
     "@nuxtjs/axios": "^5.12.0",
