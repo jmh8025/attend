@@ -7,8 +7,10 @@ export const state = () => ({
             unit_nm    : '실용음악학과',
             room_no    : '101',
             room_ch_no : '',
-            photo      : '',
-            attd_date  : '2020-12-19'
+            photo      : 'you',
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '아하하하하',
         },
         {
             exam_no    : '11002',
@@ -18,7 +20,9 @@ export const state = () => ({
             room_no    : '101',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11003',
@@ -28,7 +32,9 @@ export const state = () => ({
             room_no    : '101',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11004',
@@ -38,7 +44,9 @@ export const state = () => ({
             room_no    : '102',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11005',
@@ -48,7 +56,9 @@ export const state = () => ({
             room_no    : '102',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11006',
@@ -58,7 +68,9 @@ export const state = () => ({
             room_no    : '102',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11007',
@@ -68,7 +80,9 @@ export const state = () => ({
             room_no    : '103',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11008',
@@ -78,7 +92,9 @@ export const state = () => ({
             room_no    : '103',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         {
             exam_no    : '11009',
@@ -88,7 +104,9 @@ export const state = () => ({
             room_no    : '103',
             room_ch_no : '',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         },
         //타고사장 입실 학생
         {
@@ -99,7 +117,9 @@ export const state = () => ({
             room_no    : '103',
             room_ch_no : '101',
             photo      : '',
-            attd_date  : '2020-12-19'
+            attd_date  : '2020-12-19',
+            attd_yn    : 'N',
+            memo       : '',
         }
     ],
     eval_member: [
@@ -108,7 +128,7 @@ export const state = () => ({
             eval_nm : '유재석',
             eval_pw : '1',
             position: '',
-            comment : '본 위원'
+            comment : '본위원'
         },
         //마스터 권한
         {
@@ -116,21 +136,21 @@ export const state = () => ({
             eval_nm : '이효리',
             eval_pw : '1',
             position: 'master',
-            comment : '본 위원'
+            comment : '본위원'
         },
         {
             eval_id : 'ev3',
             eval_nm : '비',
             eval_pw : '1',
             position: '',
-            comment : '본 위원'
+            comment : '본위원'
         },
         {
             eval_id : 'ev4',
             eval_nm : '광희',
             eval_pw : '1',
             position: '',
-            comment : '예비 위원'
+            comment : '예비위원'
         }
     ],
     room: [
@@ -181,19 +201,34 @@ export const state = () => ({
         },
         {
             text: '출석여부',
-            value: 'room_no'
+            value: 'attd_yn'
         },
         {
             text: '신분증미지참',
-            value: 'photo'
+            value: 'card_yn'
+        },
+        {
+            text: '메모여부',
+            value: 'memo_yn'
         },
     ]
 })
 
+export const getters = {
+    getList : (state) => (items) => {
+        for(const list of state.student) {
+            if(list.exam_no == items) {
+                return list;
+            }
+        }
+    }
+}
+
 export const mutations = {
     LOGIN : function(state,user){
         state.authUser = user
-    }
+    },
+       
 }
 
 export const actions = {
