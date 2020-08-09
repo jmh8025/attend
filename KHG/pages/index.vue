@@ -1,97 +1,55 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
+  <v-card
+    class="mx-auto"
+    max-width="344"
+    outlined
   >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline mb-4">출석위원 로그인</div>
+        <v-list-item-title class="headline mb-1">
+          <label for="user_id">아이디</label>
+          <input type="text" name="user_id" id="user_id">
+          <br/>
+          <label for="user_id">패스워드</label>
+          <input type="text" name="user_password" id="user_password">
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-card-actions>
+      <v-btn text @click="login()">로그인</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
+  components : {
+  },
+  data(){
+    return{
+      user_id : '',
+      user_password : '',
+    }
+  },
+  methods : {
+    async login() {
+      try {
+        await this.$store.dispatch('login', {
+          id: this.user_id,
+          pw: this.user_password
+        }).then(() => this.redirect())
+      } catch (e) {
+        alert(e.message);
+      }
+    },
+    redirect () {
+      this.$router.push('/Attend')
+    }
   }
 }
 </script>
+
+<style>
+</style>
