@@ -166,40 +166,15 @@ export const state = () => ({
       full_cnt: 4
     },
   ],
-  authInfo : {
-    roomInfo : {},
-    userInfo : {}
-  },
-})
-
-export const getters = {
-  userInfo : (state) => (key) =>{
-    return key === '' ? state.authInfo.userInfo : state.authInfo.userInfo[key];
-  },
-  roomInfo: (state) => (key) =>{
-    return key === '' ? state.authInfo.roomInfo : state.authInfo.roomInfo[key];
-  },
-
-}
-
-export const mutations = {
-
-  LOGIN: function(state,user){
-    state.authInfo.userInfo = user;
-    state.authInfo.roomInfo = state.room.filter((roomInfo) => {
-      return !roomInfo.eval_id.indexOf(user.eval_id)
-    })[0];
-  },
-}
+});
 
 export const actions = {
   async login({ state,commit }, { user_id, user_password }) {
     let  resultUser   = await state.eval_member.filter((member) => { return member.eval_id === user_id && member.eval_pw === user_password });
     if (resultUser.length < 1) {
-      throw new Error('로그인에 실패했습니다.')
-      // return 'test';
+      return 'error';
+    }else{
+      return 'success';
     }
-    commit('LOGIN', resultUser[0])
   }
-
-}
+};
